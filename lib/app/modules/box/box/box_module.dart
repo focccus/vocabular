@@ -10,17 +10,8 @@ class BoxModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router('', guards: [BlockGuard()], child: (_, args) => BoxPage(0)),
-        Router(':id',
-            child: (_, args) => BoxPage(int.tryParse(args.params['id']))),
+        Router('', child: (_, args) => BoxPage(args.data)),
       ];
 
   static Inject get to => Inject<BoxModule>.of();
-}
-
-class BlockGuard implements RouteGuard {
-  @override
-  bool canActivate(String url) {
-    return false;
-  }
 }

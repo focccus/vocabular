@@ -15,12 +15,14 @@ class VocabTestModule extends ChildModule {
   List<Router> get routers => [
         Router(
           ':id/results',
-          child: (_, args) =>
-              ResultsPage(int.parse(args.params['id']), args.data),
+          child: (_, args) => ResultsPage(
+            int.parse(args.params['id']),
+            args.data,
+          ),
         ),
         Router(
-          ':id',
-          child: (_, args) => VocabTestPage(int.parse(args.params['id'])),
+          '',
+          child: (_, args) => VocabTestPage(args.data),
         ),
       ];
 

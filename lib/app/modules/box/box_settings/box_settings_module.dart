@@ -10,8 +10,7 @@ class BoxSettingsModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(':id',
-            child: (_, args) => BoxSettingsPage(int.parse(args.params['id']))),
+        Router('', child: (_, args) => BoxSettingsPage(args.data)),
       ];
 
   static Inject get to => Inject<BoxSettingsModule>.of();

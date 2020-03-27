@@ -23,6 +23,8 @@ class _BoxListPageState extends ModularState<BoxListPage, BoxListController> {
   //use 'controller' variable to access controller
   @override
   void initState() {
+    if (widget.id == null) return Navigator.pop(context);
+
     controller.loadBox(widget.id).then((box) {
       if (box.vocabCount <= 0) {
         editVocab();

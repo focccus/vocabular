@@ -28,7 +28,8 @@ class _VocabTestPageState
 
   @override
   void initState() {
-    print('ID!' + widget.id.toString());
+    if (widget.id == null) return Navigator.pop(context);
+
     controller.loadBox(widget.id).then((value) {
       focusNodes = List.generate(controller.length, (index) => FocusNode());
 

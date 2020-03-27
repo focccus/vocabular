@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:navigation_rail/navigation_rail.dart';
+import 'package:navigation_rail/navigation_rail.dart' as nv;
 
 const _tabletBreakpoint = 720.0;
 const _desktopBreakpoint = 1440.0;
@@ -27,7 +27,7 @@ class NavigationShell extends StatelessWidget {
     }
 
     return SafeArea(
-      child: NavigationRail(
+      child: nv.NavigationRail(
         currentIndex: currentPage,
         onTap: (val) {
           if (val != currentPage) {

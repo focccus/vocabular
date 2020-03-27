@@ -68,8 +68,10 @@ class _BoxesPageState extends ModularState<BoxesPage, BoxesController> {
         ),
       );
 
-  void navigateToAndReload(String p) {
-    Navigator.of(context).pushNamed(p).then((value) => controller.loadBoxes());
+  void navigateToAndReload(String p, [data]) {
+    Navigator.of(context)
+        .pushNamed(p, arguments: data)
+        .then((value) => controller.loadBoxes());
   }
 
   ExpansionPanel buildPanel(int index, Box box) => ExpansionPanel(
@@ -90,10 +92,10 @@ class _BoxesPageState extends ModularState<BoxesPage, BoxesController> {
             height: 1.0,
           ),
           ActionBar(
-            onVocab: () => navigateToAndReload('box/vocabs/${box.id}'),
-            onBoxes: () => navigateToAndReload('box/${box.id}'),
-            onTest: () => navigateToAndReload('box/test/${box.id}'),
-            onOptions: () => navigateToAndReload('box/settings/${box.id}'),
+            onVocab: () => navigateToAndReload('box/vocabs', box.id),
+            onBoxes: () => navigateToAndReload('box', box.id),
+            onTest: () => navigateToAndReload('box/test', box.id),
+            onOptions: () => navigateToAndReload('box/settings', box.id),
             onShare: () => Navigator.pushNamed(
               context,
               'box/export',

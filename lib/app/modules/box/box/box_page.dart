@@ -23,7 +23,8 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
 
   @override
   void initState() {
-    print('boxes page loaded');
+    if (widget.id == null) return Navigator.pop(context);
+
     controller.loadBox(widget.id).then((box) {
       tabController = TabController(
         vsync: this,
@@ -72,8 +73,12 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
     );
   }
 
+  double vertPadding = 16;
+
   Widget buildLoaded() {
-    final w = MediaQuery.of(context).size.width;
+    final h = MediaQuery.of(context).size.height;
+
+    vertPadding = h < 380 ? 8 : 16;
     return Scaffold(
       appBar: AppBar(
         title: Text(controller.box.title),
@@ -84,7 +89,7 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
           Expanded(
             child: LayoutFoundation(
               (EdgeInsets p) => Card(
-                margin: p,
+                margin: p.copyWith(top: vertPadding, bottom: vertPadding),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8)),
                 child: Container(
@@ -122,6 +127,7 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
 
   Widget checkCard() {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -144,10 +150,11 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
           'Stufe ${controller.com.length - controller.selectedCompartment}',
           style: TextStyle(fontSize: 20),
         ),
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Divider(),
-        ),
+        if (vertPadding >= 16)
+          Padding(
+            padding: EdgeInsets.all(vertPadding),
+            child: Divider(),
+          ),
         ...buildContent()
       ],
     );
@@ -159,10 +166,10 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
         controller.box.askForeign
             ? controller.currentVocabData.main
             : controller.currentVocabData.other,
-        style: TextStyle(fontSize: 32),
+        style: TextStyle(fontSize: vertPadding * 2),
       ),
       SizedBox(
-        height: 16,
+        height: vertPadding,
       ),
     ];
 
@@ -202,7 +209,7 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
               ),
             ),
             SizedBox(
-              width: 16,
+              width: vertPadding,
             ),
             Expanded(
               child: Text(checked
@@ -214,7 +221,7 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
           ],
         ),
         SizedBox(
-          height: 16,
+          height: vertPadding,
         ),
         if (controller.box.hasFormen)
           Row(
@@ -240,11 +247,12 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
                 ),
               ),
               SizedBox(
-                width: 16,
+                width: vertPadding,
               ),
               Expanded(
-                  child: Text(
-                      checked ? controller.currentVocabData?.forms ?? '' : ''))
+                child: Text(
+                    checked ? controller.currentVocabData?.forms ?? '' : ''),
+              )
             ],
           ),
         Spacer(),
@@ -281,7 +289,7 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
                 : controller.currentVocabData.main,
           ),
           SizedBox(
-            height: 16,
+            height: vertPadding,
           ),
           Text(
             controller.currentVocabData?.forms ?? '',
@@ -289,11 +297,11 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
           ),
           Spacer(),
           ButtonBar(
-            buttonHeight: 48,
+            buttonHeight: 32 + vertPadding,
             alignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               FlatButton.icon(
-                padding: EdgeInsets.symmetric(horizontal: 64),
+                padding: EdgeInsets.symmetric(horizontal: 48),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(32),
                 ),
@@ -310,7 +318,7 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
               ),
               RaisedButton.icon(
                 autofocus: true,
-                padding: EdgeInsets.symmetric(horizontal: 64),
+                padding: EdgeInsets.symmetric(horizontal: 48),
                 color: Theme.of(context).primaryColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(32),
@@ -330,7 +338,7 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
         ret.addAll([
           Text(''),
           SizedBox(
-            height: 16,
+            height: vertPadding,
           ),
           Text(''),
           Spacer(),

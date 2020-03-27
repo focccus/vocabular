@@ -23,7 +23,7 @@ class _BoxSettingsPageState
 
   @override
   void initState() {
-    print('settings loaded');
+    if (widget.id == null) return Navigator.pop(context);
 
     controller
         .loadBox(widget.id)
