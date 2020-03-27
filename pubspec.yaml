@@ -40,6 +40,7 @@ dev_dependencies:
   mockito: ^4.1.1
   mobx_codegen: ^1.0.2
   build_runner: ^1.7.4
+  build_web_compilers:
   flutter_test:
     sdk: flutter
 scripts:
