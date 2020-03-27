@@ -1,0 +1,148 @@
+﻿{
+  "box": {
+    "title": "Biotechnogy",
+    "lang": "en",
+    "hasFormen": false,
+    "mustType": false,
+    "goback": 1,
+    "random": true,
+    "askOther": true,
+    "vocabtest": { "ask": 84, "askLang": "Deutsch" }
+  },
+  "vocabs": [
+    { "main": "Eigenschaft", "other": "trait", "id": 1 },
+    { "main": "Dns", "other": "Dna", "id": 2 },
+    { "main": "etw. Bestimmen", "other": "to determine sth", "id": 3 },
+    {
+      "main": "sexuelle Fortpflanzung",
+      "other": "sexual reproduction",
+      "id": 4
+    },
+    { "main": "etw erben", "other": "to inherit sth", "id": 5 },
+    { "main": "Krankheit", "other": "disease", "id": 6 },
+    { "main": "erheblich, angeboren", "other": "hereditary", "id": 7 },
+    { "main": "genetische Störung", "other": "genetic disorder", "id": 8 },
+    { "main": "Reihe", "other": "sequence", "id": 9 },
+    { "main": "von etw stammen", "other": "to stem from sth", "id": 10 },
+    { "main": "Genom", "other": "genome", "id": 11 },
+    { "main": "in die Wege leiten", "other": "to launch", "id": 12 },
+    { "main": "Ziel", "other": "goal", "id": 13 },
+    { "main": "etw erfassen", "other": "to map sth", "id": 14 },
+    { "main": "Position", "other": "location", "id": 15 },
+    { "main": "etw entzifferen", "other": "to decode sth", "id": 16 },
+    { "main": "Forscher", "other": "researcher", "id": 17 },
+    {
+      "main": "Gefahr laufen etw zu tun",
+      "other": "to be at risk of doing sth",
+      "id": 18
+    },
+    { "main": "Symptom", "other": "symtom", "id": 19 },
+    { "main": "Leiden", "other": "condition", "id": 20 },
+    { "main": "Behandlung", "other": "treatment", "id": 21 },
+    {
+      "main": "Fortpflanzungstechnologie",
+      "other": "reproductive technology",
+      "id": 22
+    },
+    { "main": "Stammzellforschung", "other": "stem cell research", "id": 23 },
+    {
+      "main": "eine Frage aufwerfen",
+      "other": "to raise a concern",
+      "id": 24
+    },
+    { "main": "moralisch", "other": "moral", "id": 25 },
+    {
+      "main": "therapeutisches Klonen",
+      "other": "therapeutic cloning",
+      "id": 26
+    },
+    { "main": "Naturwissenschaftler", "other": "scientist", "id": 27 },
+    { "main": "Labor", "other": "laboratory", "id": 28 },
+    { "main": "etw gewinnen", "other": "to extract sth", "id": 29 },
+    { "main": "Auszug, Extrakt", "other": "extract", "id": 30 },
+    {
+      "main": "embryonale Stammzelle",
+      "other": "embryonic stem cell",
+      "id": 31
+    },
+    {
+      "main": "etw mit etw verschmelzen",
+      "other": "to fuse sth with sth",
+      "id": 32
+    },
+    { "main": "Fähigkeit", "other": "potential", "id": 33 },
+    { "main": "Nervengewebe", "other": "nerve tissue", "id": 34 },
+    { "main": "einzeln", "other": "individual", "id": 35 },
+    {
+      "main": "etw in etw einpflanzen",
+      "other": "to implant sth in sth",
+      "id": 36
+    },
+    { "main": "Patient", "other": "patient", "id": 37 },
+    {
+      "main": "degenerative Krankheit",
+      "other": "degenerative illness",
+      "id": 38
+    },
+    { "main": "organ", "other": "organ", "id": 39 },
+    { "main": "Verfahren", "other": "technique", "id": 40 },
+    { "main": "Transplatation", "other": "translant", "id": 41 },
+    { "main": "Abstoßung", "other": "rejection", "id": 42 },
+    { "main": "umstritten", "other": "controversial", "id": 43 },
+    { "main": "Kontroverse", "other": "controversy", "id": 44 },
+    { "main": "Quelle", "other": "source", "id": 45 },
+    { "main": "etw untersuchen", "other": "to look into sth", "id": 46 },
+    { "main": "Erwachsener", "other": "adult", "id": 47 },
+    { "main": "Säugetier", "other": "mammal", "id": 48 },
+    {
+      "main": "etw gentechisch veränderen",
+      "other": "to modify sth genetically",
+      "id": 49
+    },
+    { "main": "landwirtschaftlich", "other": "agricultural", "id": 50 },
+    { "main": "transgen", "other": "transgenic", "id": 51 },
+    { "main": "etw konstruieren", "other": "to engineer", "id": 52 },
+    { "main": "Organismus", "other": "organism", "id": 53 },
+    { "main": "Medikament", "other": "drug", "id": 54 },
+    { "main": "hochleistungs-", "other": "high-performance", "id": 55 },
+    { "main": "Junge", "other": "offspring", "id": 56 },
+    {
+      "main": "nicht anfällig sein für etw",
+      "other": "to be resistant to sth",
+      "id": 57
+    },
+    { "main": "ausgestorben", "other": "extinct", "id": 58 },
+    { "main": "aussterben", "other": "to become extinct", "id": 59 },
+    { "main": "etw erhalten", "other": "to preserve sth", "id": 60 },
+    {
+      "main": "von Aussterben bedrohte Arten",
+      "other": "endangered species",
+      "id": 61
+    },
+    {
+      "main": "eine kontroverse Frage",
+      "other": "a controversial issue",
+      "id": 62
+    },
+    {
+      "main": "Klonen von Menschen zur Fortpflanzung",
+      "other": "human reproductive cloning",
+      "id": 63
+    },
+    { "main": "Prozedur, Verfahren", "other": "procedure", "id": 64 },
+    { "main": "unfruchtbar", "other": "infertile", "id": 65 },
+    { "main": "Paar", "other": "couple", "id": 66 },
+    { "main": "genetischer Schaden", "other": "genetic defect", "id": 67 },
+    { "main": "Organspender", "other": "organ donor", "id": 68 },
+    { "main": "in Not", "other": "in need", "id": 69 },
+    {
+      "id": 70,
+      "main": "jmd drängen etw zu tun",
+      "other": "to urge db to do sth"
+    },
+    { "main": "Fehlgeburt", "other": "spontaneous abortion", "id": 71 },
+    { "main": "fötal", "other": "foetal", "id": 72 },
+    { "main": "Missbildung", "other": "malformation", "id": 73 },
+    { "main": "etw verbieten", "other": "to ban sth", "id": 74 }
+  ]
+}
