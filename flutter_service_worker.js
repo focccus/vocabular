@@ -4,13 +4,10 @@ const RESOURCES = {
   "assets/AssetManifest.json": "99914b932bd37a50b983c5e7c90ae93b",
 "assets/FontManifest.json": "580ff1a5d08679ded8fcf5c6848cece7",
 "assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
-"assets/LICENSE": "995c0d1bbb00b372e29f4a07fda54008",
-"favicon.png": "5dcef449791fa27946b3d35ad8803796",
-"icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
-"icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
-"index.html": "d7c28390514f99233ac8460a85bdcd8a",
-"main.dart.js": "0d2f0176d3d7de7517e6cff6949efaa4",
-"manifest.json": "5589ed3059dee03d35eb5c4627c4a29d"
+"assets/LICENSE": "950fe08c430ea815bde814ef1a1a0d2a",
+"index.html": "f63f320ec04cfb601299497194917999",
+"main.dart.js": "edc539814a01795d056385c40323dc19",
+"manifest.json": "5997231cf54f3b678016b696bf329631"
 };
 
 self.addEventListener('activate', function (event) {
