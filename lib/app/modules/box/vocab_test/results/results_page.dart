@@ -78,7 +78,7 @@ class _ResultsPageState extends ModularState<ResultsPage, ResultsController> {
                   child: CircularProgressIndicator(
                     value: controller.percentage,
                     strokeWidth: circleSize / 45,
-                    backgroundColor: Colors.grey.shade200,
+                    backgroundColor: Theme.of(context).cardColor,
                   ),
                 ),
                 Center(
@@ -98,54 +98,57 @@ class _ResultsPageState extends ModularState<ResultsPage, ResultsController> {
               ],
             ),
           ),
-          ExpansionPanelList(
-            expandedHeaderPadding: EdgeInsets.all(8),
-            animationDuration: Duration(milliseconds: 200),
-            expansionCallback: (i, b) {
-              if (!b) {
-                controller.expandedCard = i;
-              } else if (controller.expandedCard == i) {
-                controller.expandedCard = -1;
-              }
-            },
-            children: controller.vocabs.map((v) => buildPanel(v)).toList(),
+          Observer(
+            builder: (_) => ExpansionPanelList(
+              expandedHeaderPadding: EdgeInsets.all(8),
+              animationDuration: Duration(milliseconds: 200),
+              expansionCallback: (i, b) {
+                if (!b) {
+                  controller.expandedCard = i;
+                } else if (controller.expandedCard == i) {
+                  controller.expandedCard = -1;
+                }
+              },
+              children: controller.vocabs.map((v) => buildPanel(v)).toList(),
+            ),
           ),
         ],
       ),
     );
   }
 
-  ExpansionPanel buildPanel(VocabTestValue v) => ExpansionPanel(
-        isExpanded: controller.expandedCard == controller.vocabs.indexOf(v),
-        canTapOnHeader: true,
-        headerBuilder: (c, b) {
-          return ListTile(
-            title: Text(
-              controller.box.getDisplayText(v.vocab) +
-                  (b ? '' : ' - ${v.input}'),
-            ),
-            trailing: b ? null : MistakeIndicator(v.mistakes),
-          );
-        },
-        body: Column(
-          children: <Widget>[
+  ExpansionPanel buildPanel(VocabTestValue v) {
+    return ExpansionPanel(
+      isExpanded: controller.expandedCard == controller.vocabs.indexOf(v),
+      canTapOnHeader: true,
+      headerBuilder: (c, b) {
+        return ListTile(
+          title: Text(
+            controller.box.getDisplayText(v.vocab) + (b ? '' : ' - ${v.input}'),
+          ),
+          trailing: b ? null : MistakeIndicator(v.mistakes),
+        );
+      },
+      body: Column(
+        children: <Widget>[
+          buildMistakeTile(
+            v.input,
+            controller.box.getDisplayText(v.vocab, true),
+            v.valueMistakes,
+          ),
+          if (controller.box.hasFormen)
             buildMistakeTile(
-              v.input,
-              controller.box.getDisplayText(v.vocab, true),
-              v.valueMistakes,
+              v.inputForms,
+              v.vocab.forms,
+              v.formsMistakes,
             ),
-            if (controller.box.hasFormen)
-              buildMistakeTile(
-                v.inputForms,
-                v.vocab.forms,
-                v.formsMistakes,
-              ),
-            SizedBox(
-              height: 16,
-            )
-          ],
-        ),
-      );
+          SizedBox(
+            height: 16,
+          )
+        ],
+      ),
+    );
+  }
 
   ListTile buildMistakeTile(String input, String correction, int mistake) =>
       ListTile(

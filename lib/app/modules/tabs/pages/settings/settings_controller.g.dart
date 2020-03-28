@@ -9,6 +9,17 @@ part of 'settings_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SettingsController on _SettingsControllerBase, Store {
+  Computed<MaterialColor> _$colorComputed;
+
+  @override
+  MaterialColor get color =>
+      (_$colorComputed ??= Computed<MaterialColor>(() => super.color)).value;
+  Computed<bool> _$isDarkComputed;
+
+  @override
+  bool get isDark =>
+      (_$isDarkComputed ??= Computed<bool>(() => super.isDark)).value;
+
   final _$langsAtom = Atom(name: '_SettingsControllerBase.langs');
 
   @override
@@ -86,6 +97,28 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
   }
 
   @override
+  void toggleDarkMode(bool v) {
+    final _$actionInfo =
+        _$_SettingsControllerBaseActionController.startAction();
+    try {
+      return super.toggleDarkMode(v);
+    } finally {
+      _$_SettingsControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setColor(MaterialColor c) {
+    final _$actionInfo =
+        _$_SettingsControllerBaseActionController.startAction();
+    try {
+      return super.setColor(c);
+    } finally {
+      _$_SettingsControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void removeLang(String lang) {
     final _$actionInfo =
         _$_SettingsControllerBaseActionController.startAction();
@@ -99,7 +132,7 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
   @override
   String toString() {
     final string =
-        'langs: ${langs.toString()},grades: ${grades.toString()},isLoading: ${isLoading.toString()}';
+        'langs: ${langs.toString()},grades: ${grades.toString()},isLoading: ${isLoading.toString()},color: ${color.toString()},isDark: ${isDark.toString()}';
     return '{$string}';
   }
 }

@@ -64,58 +64,60 @@ class _ImportPageState extends ModularState<ImportPage, ImportController> {
   Widget buildLoaded() {
     final w = MediaQuery.of(context).size.width;
     return LayoutFoundation(
-      (EdgeInsets p) => ListView(
-        padding: p,
-        children: <Widget>[
-          Text(
-            '${controller.vocabsMap.length} Vokabeln zu Importieren',
-            style: TextStyle(fontSize: 16),
-          ),
-          VocabTable(
-            controller.vocabs,
-            showForms: controller.hasFormen,
-            lang:
-                getLanguageByIsoCode(controller.lang, germanLanguagesList).name,
-          ),
-          if ((widget?.canImportBox ?? true) && controller.box != null)
-            CheckboxListTile(
-              value: controller.importBox,
-              onChanged: (v) => controller.importBox = v,
-              title: Text('Box importieren'),
-              subtitle: Text(
-                'Soll die ganze Box importiert werden oder nur die Vokabeln?',
+      (EdgeInsets p) => Observer(
+        builder: (_) => ListView(
+          padding: p,
+          children: <Widget>[
+            Text(
+              '${controller.vocabsMap.length} Vokabeln zu Importieren',
+              style: TextStyle(fontSize: 16),
+            ),
+            VocabTable(
+              controller.vocabs,
+              showForms: controller.hasFormen,
+              lang: getLanguageByIsoCode(controller.lang, germanLanguagesList)
+                  .name,
+            ),
+            if ((widget?.canImportBox ?? true) && controller.box != null)
+              CheckboxListTile(
+                value: controller.importBox,
+                onChanged: (v) => controller.importBox = v,
+                title: Text('Box importieren'),
+                subtitle: Text(
+                  'Soll die ganze Box importiert werden oder nur die Vokabeln?',
+                ),
               ),
-            ),
-          // ListTile(
-          //   title: Text(
-          //     'Sprache',
-          //   ),
-          //   trailing: DropdownButton<String>(
-          //     value: controller.lang,
-          //     icon: Icon(Icons.language),
-          //     onChanged: (v) => controller.lang = v,
-          //     items: controller.langs
-          //         .map((l) => DropdownMenuItem<String>(
-          //               value: l,
-          //               child: Text(
-          //                 getLanguageByIsoCode(l, germanLanguagesList).name,
-          //               ),
-          //             ))
-          //         .toList(),
-          //   ),
-          // ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 8.0,
-              horizontal: w >= 720 ? 64 : 16,
-            ),
-            child: RaisedButton(
-              child: Text('Bestätigen'),
-              onPressed: save,
-              textColor: Colors.white,
-            ),
-          )
-        ],
+            // ListTile(
+            //   title: Text(
+            //     'Sprache',
+            //   ),
+            //   trailing: DropdownButton<String>(
+            //     value: controller.lang,
+            //     icon: Icon(Icons.language),
+            //     onChanged: (v) => controller.lang = v,
+            //     items: controller.langs
+            //         .map((l) => DropdownMenuItem<String>(
+            //               value: l,
+            //               child: Text(
+            //                 getLanguageByIsoCode(l, germanLanguagesList).name,
+            //               ),
+            //             ))
+            //         .toList(),
+            //   ),
+            // ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 8.0,
+                horizontal: w >= 720 ? 64 : 16,
+              ),
+              child: RaisedButton(
+                child: Text('Bestätigen'),
+                onPressed: save,
+                textColor: Colors.white,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

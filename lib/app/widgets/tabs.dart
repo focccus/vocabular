@@ -12,7 +12,7 @@ class CustomTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: Theme.of(context).cardColor,
       child: LayoutBuilder(builder: (_, layout) {
         final w = layout.maxWidth;
 

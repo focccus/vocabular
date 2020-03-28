@@ -33,22 +33,23 @@ class _VocabTestPageState
     controller.loadBox(widget.id).then((value) {
       focusNodes = List.generate(controller.length, (index) => FocusNode());
 
-      cards = controller.vocabs.map(
-        (vocab) {
-          final index = controller.vocabs.indexOf(vocab);
-          return TestCard(
-            index,
-            vocab.vocab,
-            focusNode: focusNodes[index],
-            hasForms: controller.box.hasFormen,
-            askForeign: controller.box.askForeign,
-            lang: controller.box.lang,
-            nextPage: () {
-              animateTo(index + 1, focus: true);
+      cards = controller.vocabs?.map(
+            (vocab) {
+              final index = controller.vocabs.indexOf(vocab);
+              return TestCard(
+                index,
+                vocab.vocab,
+                focusNode: focusNodes[index],
+                hasForms: controller.box.hasFormen,
+                askForeign: controller.box.askForeign,
+                lang: controller.box.lang,
+                nextPage: () {
+                  animateTo(index + 1, focus: true);
+                },
+              );
             },
-          );
-        },
-      ).toList();
+          )?.toList() ??
+          [];
     });
     pageController.addListener(() {
       if (pageController.page.round() > controller.selectedPage ||
@@ -89,7 +90,7 @@ class _VocabTestPageState
 
   void confirm() {
     Navigator.of(context).popAndPushNamed(
-      '/box/test/${widget.id}/results',
+      '/box/test/results/${widget.id}',
       arguments: controller.vocabs,
     );
   }
@@ -125,7 +126,7 @@ class _VocabTestPageState
                   animateFromLastPercent: true,
                   lineHeight: 12.0,
                   progressColor: Theme.of(context).primaryColor,
-                  backgroundColor: Colors.grey.shade200,
+                  backgroundColor: Theme.of(context).cardColor,
                   percent: (controller.selectedPage + 1) / controller.length,
                 ),
               );

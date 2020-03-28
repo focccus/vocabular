@@ -29,55 +29,57 @@ class _ExportPageState extends ModularState<ExportPage, ExportController> {
 
   Widget buildLoaded() {
     return LayoutFoundation(
-      (EdgeInsets p) => ListView(
-        padding: p,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            decoration: BoxDecoration(
-              border:
-                  Border.all(color: Theme.of(context).primaryColor, width: 2),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(
-              'Hier kannst du deine Vokabelbox exportieren. Wähle einfach die Vokabeln aus und teile sie mit deinen Freunden!',
-              textAlign: TextAlign.center,
-            ),
-          ),
-          VocabTable(
-            controller.vocabs,
-            selected: controller.selected?.toList(),
-            onSelected: controller.select,
-          ),
-          CheckboxListTile(
-            value: controller.justExportVocabs,
-            onChanged: (v) => controller.justExportVocabs = v,
-            title: Text('Nur Vokabeln exportieren'),
-            subtitle: Text(
-              'Teile nur die einzelnen Vokabeln ohne die streng geheime Box freizugeben',
-            ),
-          ),
-          CheckboxListTile(
-            value: controller.includeCompartments,
-            onChanged: (v) => controller.includeCompartments = v,
-            title: Text('Speichere Fächer'),
-            subtitle: Text(
-              'Lege fest, ob der Fortschritt im Vokabeltrainer exportiert werden soll',
-            ),
-          ),
-          Builder(
-            builder: (context) => Padding(
-              padding: const EdgeInsets.all(16),
-              child: RaisedButton.icon(
-                padding: const EdgeInsets.all(8),
-                textColor: Colors.white,
-                onPressed: controller.export,
-                icon: Icon(Icons.file_download),
-                label: Text('Exportieren'),
+      (EdgeInsets p) => Observer(
+        builder: (_) => ListView(
+          padding: p,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              decoration: BoxDecoration(
+                border:
+                    Border.all(color: Theme.of(context).primaryColor, width: 2),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                'Hier kannst du deine Vokabelbox exportieren. Wähle einfach die Vokabeln aus und teile sie mit deinen Freunden!',
+                textAlign: TextAlign.center,
               ),
             ),
-          )
-        ],
+            VocabTable(
+              controller.vocabs,
+              selected: controller.selected?.toList(),
+              onSelected: controller.select,
+            ),
+            CheckboxListTile(
+              value: controller.justExportVocabs,
+              onChanged: (v) => controller.justExportVocabs = v,
+              title: Text('Nur Vokabeln exportieren'),
+              subtitle: Text(
+                'Teile nur die einzelnen Vokabeln ohne die streng geheime Box freizugeben',
+              ),
+            ),
+            CheckboxListTile(
+              value: controller.includeCompartments,
+              onChanged: (v) => controller.includeCompartments = v,
+              title: Text('Speichere Fächer'),
+              subtitle: Text(
+                'Lege fest, ob der Fortschritt im Vokabeltrainer exportiert werden soll',
+              ),
+            ),
+            Builder(
+              builder: (context) => Padding(
+                padding: const EdgeInsets.all(16),
+                child: RaisedButton.icon(
+                  padding: const EdgeInsets.all(8),
+                  textColor: Colors.white,
+                  onPressed: controller.export,
+                  icon: Icon(Icons.file_download),
+                  label: Text('Exportieren'),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

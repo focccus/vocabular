@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:language_pickers/languages.dart';
 import 'package:language_pickers/utils/utils.dart';
 import 'package:mobx/mobx.dart';
+import 'package:vocabular/app/app_controller.dart';
 import 'package:vocabular/app/models/langs.dart';
 import 'package:vocabular/app/repositories/options_repository.dart';
 import 'package:vocabular/app/repositories/vocab_repository.dart';
@@ -12,8 +14,9 @@ class SettingsController = _SettingsControllerBase with _$SettingsController;
 
 abstract class _SettingsControllerBase with Store {
   OptionsRepository repo;
+  AppController app;
 
-  _SettingsControllerBase(this.repo);
+  _SettingsControllerBase(this.repo, this.app);
 
   @observable
   ObservableList<String> langs;
@@ -39,6 +42,24 @@ abstract class _SettingsControllerBase with Store {
       grades = grade;
       repo.saveOption('grades', grade);
     }
+  }
+
+  List<MaterialColor> get colorOptions => app.colorOptions;
+
+  @computed
+  MaterialColor get color => app.theme;
+
+  @computed
+  bool get isDark => app.isDark;
+
+  @action
+  void toggleDarkMode(bool v) {
+    app.setBrightness(v);
+  }
+
+  @action
+  void setColor(MaterialColor c) {
+    app.setColor(c);
   }
 
   @action

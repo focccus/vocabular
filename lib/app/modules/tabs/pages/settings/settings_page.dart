@@ -51,7 +51,7 @@ class _SettingsPageState
     if (await controller.checkDeletable(lang)) {
       final res = await showYesNoDialog(
         context,
-        'Willst du ${getLanguageByIsoCode(lang, germanLanguagesList)} wirklich löschen?',
+        'Willst du ${getLanguageByIsoCode(lang, germanLanguagesList).name} wirklich löschen?',
       );
 
       if (res != null && res) {
@@ -92,58 +92,113 @@ class _SettingsPageState
     final w = MediaQuery.of(context).size.width;
 
     return LayoutFoundation(
-      (EdgeInsets p) => ListView(
-        padding: p.copyWith(top: 32),
-        children: <Widget>[
-          TitleDivider('Sprachen'),
-          ListBody(
-            children: controller.langs
-                .map((l) => LanguageTile(
-                      getLanguageByIsoCode(l, germanLanguagesList),
-                      onLongPress: () => removeLang(l),
-                    ))
-                .toList(),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: w >= 720 ? 64 : 16,
+      (EdgeInsets p) => Observer(
+        builder: (_) => ListView(
+          padding: p.copyWith(top: 32),
+          children: <Widget>[
+            TitleDivider('Sprachen'),
+            ListBody(
+              children: controller.langs
+                  .map((l) => LanguageTile(
+                        getLanguageByIsoCode(l, germanLanguagesList),
+                        onLongPress: () => removeLang(l),
+                      ))
+                  .toList(),
             ),
-            child: OutlineButton.icon(
-              onPressed: addLang,
-              icon: Icon(Icons.language),
-              label: Text('Sprache hinzufügen'),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: w >= 720 ? 64 : 16,
+              ),
+              child: OutlineButton.icon(
+                onPressed: addLang,
+                icon: Icon(Icons.language),
+                label: Text('Sprache hinzufügen'),
+              ),
             ),
-          ),
-          TitleDivider('Noten'),
-          ListTile(
-            leading: Icon(Icons.blur_circular),
-            title: Text(
-              'Wähle die gewünschte Bewertungsform',
-            ),
-            trailing: DropdownButton<String>(
-              value: controller.grades,
-              onChanged: controller.setGrade,
-              items: controller.gradingOptions.map((l) {
-                String text;
+            TitleDivider('Noten'),
+            ListTile(
+              leading: Icon(Icons.blur_circular),
+              title: Text(
+                'Wähle die gewünschte Bewertungsform',
+              ),
+              trailing: DropdownButton<String>(
+                value: controller.grades,
+                onChanged: controller.setGrade,
+                items: controller.gradingOptions.map((l) {
+                  String text;
 
-                if (l == 'us')
-                  text = 'A - F';
-                else if (l == 'ob')
-                  text = '15 - 0';
-                else
-                  text = '1 - 6';
+                  if (l == 'us')
+                    text = 'A - F';
+                  else if (l == 'ob')
+                    text = '15 - 0';
+                  else
+                    text = '1 - 6';
 
-                return DropdownMenuItem<String>(
-                  value: l,
-                  child: Text(
-                    text,
+                  return DropdownMenuItem<String>(
+                    value: l,
+                    child: Text(
+                      text,
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+            TitleDivider('Aussehen'),
+            SwitchListTile(
+              value: controller.isDark,
+              onChanged: controller.toggleDarkMode,
+              title: Text('Dark mode'),
+            ),
+            ColorChooser(
+              controller.color,
+              controller.colorOptions,
+              controller.setColor,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ColorChooser extends StatelessWidget {
+  final MaterialColor color;
+  final List<MaterialColor> colors;
+  final void Function(MaterialColor) onColorChanged;
+
+  ColorChooser(this.color, this.colors, this.onColorChanged);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: colors
+            .map(
+              (c) => InkWell(
+                onTap: () => onColorChanged(c),
+                splashColor: c,
+                child: Container(
+                  height: 32,
+                  width: 32,
+                  decoration: BoxDecoration(
+                    color: c,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      if (c == color)
+                        BoxShadow(
+                          color: Colors.black54,
+                          blurRadius: 8,
+                          offset: Offset(4, 4),
+                          spreadRadius: 1,
+                        )
+                    ],
                   ),
-                );
-              }).toList(),
-            ),
-          ),
-          TitleDivider('Aussehen'),
-        ],
+                ),
+              ),
+            )
+            .toList(),
       ),
     );
   }

@@ -51,59 +51,22 @@ class _BoxesPageState extends ModularState<BoxesPage, BoxesController> {
         ),
       );
   Widget buildLoaded() => SingleChildScrollView(
-        child: ExpansionPanelList(
-          expandedHeaderPadding: EdgeInsets.all(8),
-          animationDuration: Duration(milliseconds: 200),
-          expansionCallback: (i, b) {
-            if (!b) {
-              controller.expandedCard = i;
-            } else if (controller.expandedCard == i) {
-              controller.expandedCard = -1;
-            }
-          },
-          children: controller.boxes.map((box) {
-            final index = controller.boxes.indexOf(box);
-            return buildPanel(index, box);
-          }).toList(),
+        child: Observer(
+          builder: (_) => BoxPanelList(
+            expanded: controller.expandedCard,
+            onSelected: (i) => controller.expandedCard = i,
+            boxes: controller.boxes,
+            navigateToAndReload: navigateToAndReload,
+          ),
         ),
       );
 
   void navigateToAndReload(String p, [data]) {
-    Navigator.of(context)
-        .pushNamed(p, arguments: data)
-        .then((value) => controller.loadBoxes());
+    print(data);
+    Navigator.of(context).pushNamed(p, arguments: data).then(
+          (value) => controller.loadBoxes(),
+        );
   }
-
-  ExpansionPanel buildPanel(int index, Box box) => ExpansionPanel(
-        isExpanded: controller.expandedCard == index,
-        canTapOnHeader: true,
-        headerBuilder: (c, b) {
-          return ListTile(
-            title: Text(box.title),
-            subtitle: Text('${box.vocabCount} Vocabs'),
-            leading: CircleAvatar(
-              child: Text(box.lang.toUpperCase()),
-            ),
-          );
-        },
-        body: Column(children: <Widget>[
-          Divider(
-            thickness: 1.0,
-            height: 1.0,
-          ),
-          ActionBar(
-            onVocab: () => navigateToAndReload('box/vocabs', box.id),
-            onBoxes: () => navigateToAndReload('box', box.id),
-            onTest: () => navigateToAndReload('box/test', box.id),
-            onOptions: () => navigateToAndReload('box/settings', box.id),
-            onShare: () => Navigator.pushNamed(
-              context,
-              'box/export',
-              arguments: box,
-            ),
-          ),
-        ]),
-      );
 
   @override
   Widget build(BuildContext context) {
@@ -133,4 +96,70 @@ class _BoxesPageState extends ModularState<BoxesPage, BoxesController> {
       ),
     );
   }
+}
+
+class BoxPanelList extends StatelessWidget {
+  final int expanded;
+  final List<Box> boxes;
+  final void Function(String, [dynamic]) navigateToAndReload;
+  final void Function(int) onSelected;
+
+  const BoxPanelList({
+    Key key,
+    this.expanded,
+    this.boxes,
+    this.navigateToAndReload,
+    this.onSelected,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionPanelList(
+      expandedHeaderPadding: EdgeInsets.all(8),
+      animationDuration: Duration(milliseconds: 200),
+      expansionCallback: (i, b) {
+        if (!b) {
+          onSelected(i);
+        } else if (expanded == i) {
+          onSelected(-1);
+        }
+      },
+      children: boxes.map((box) {
+        final index = boxes.indexOf(box);
+        return buildPanel(context, index, box);
+      }).toList(),
+    );
+  }
+
+  ExpansionPanel buildPanel(BuildContext context, int index, Box box) =>
+      ExpansionPanel(
+        isExpanded: expanded == index,
+        canTapOnHeader: true,
+        headerBuilder: (c, b) {
+          return ListTile(
+            title: Text(box.title),
+            subtitle: Text('${box.vocabCount} Vocabs'),
+            leading: CircleAvatar(
+              child: Text(box.lang.toUpperCase()),
+            ),
+          );
+        },
+        body: Column(children: <Widget>[
+          Divider(
+            thickness: 1.0,
+            height: 1.0,
+          ),
+          ActionBar(
+            onVocab: () => navigateToAndReload('box/vocabs', box.id),
+            onBoxes: () => navigateToAndReload('box', box.id),
+            onTest: () => navigateToAndReload('box/test', box.id),
+            onOptions: () => navigateToAndReload('box/settings', box.id),
+            onShare: () => Navigator.pushNamed(
+              context,
+              'box/export',
+              arguments: box,
+            ),
+          ),
+        ]),
+      );
 }

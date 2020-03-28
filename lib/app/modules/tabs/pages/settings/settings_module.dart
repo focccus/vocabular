@@ -5,7 +5,7 @@ import 'package:vocabular/app/modules/tabs/pages/settings/settings_page.dart';
 class SettingsModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => SettingsController(i.get())),
+        Bind((i) => SettingsController(i.get(), i.get())),
       ];
 
   @override
