@@ -96,10 +96,8 @@ abstract class _ExportControllerBase with Store {
         box.title + '.vocab',
         json.encode(res),
       );
-      print(path);
       return path != null ? true : null;
     } catch (err) {
-      print(err);
       return false;
     }
   }

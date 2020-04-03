@@ -65,7 +65,6 @@ class _BoxesPageState extends ModularState<BoxesPage, BoxesController> {
       );
 
   void navigateToAndReload(String p, [data]) {
-    print(data);
     Navigator.of(context).pushNamed(p, arguments: data).then(
           (value) => controller.loadBoxes(),
         );

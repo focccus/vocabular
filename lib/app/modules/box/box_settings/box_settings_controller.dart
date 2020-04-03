@@ -128,7 +128,6 @@ abstract class _BoxSettingsControllerBase with Store {
       await storage.saveBox(box, box.id);
       return true;
     } catch (e) {
-      print(e);
       errorMessage = 'An error while saving occured! Please try again';
     }
     return false;

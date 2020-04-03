@@ -54,7 +54,6 @@ abstract class _VocabTestControllerBase with Store {
 
   @action
   void applyAnswer(int index, String answer, String forms) {
-    print('saved $index');
     vocabs[index] = vocabs[index].copyWith(input: answer, inputForms: forms);
   }
 

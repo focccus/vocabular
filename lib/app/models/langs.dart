@@ -16,8 +16,6 @@ Language getLanguageByIsoCode(
   String lang, [
   List<Map<String, String>> langs,
 ]) {
-  print(lang);
-
   if (lang == 'de') langs ??= germanLanguagesList;
   langs ??= defaultLanguagesList.cast<Map<String, String>>();
   try {

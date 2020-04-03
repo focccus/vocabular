@@ -65,8 +65,8 @@ abstract class _ImportControllerBase with Store {
 
       for (var vMap in map['vocabs']) {
         final v = Vocab.fromMap(vMap);
-        if (v != null && v.id != null) {
-          vocabsMap[v.id] = v.copyWith(id: null);
+        if (v != null) {
+          vocabsMap[v.id ?? vocabsMap.length] = v.copyWith(id: null);
         }
       }
 
@@ -128,8 +128,6 @@ abstract class _ImportControllerBase with Store {
           c = c.map((v) => v.copyWith(id: vocabsMap[v.id].id)).toList();
         }
       }
-
-      print(vocabs.map((e) => e.id).toList());
 
       box = box.copyWith(
         compartments: com,

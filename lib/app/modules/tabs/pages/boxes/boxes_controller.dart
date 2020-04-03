@@ -35,7 +35,6 @@ abstract class _BoxesControllerBase with Store {
 
   @computed
   LoadingState get state {
-    print(boxesFuture?.status ?? 'error');
     if (boxesFuture == null || boxesFuture.status == FutureStatus.rejected) {
       return LoadingState.initial;
     }
