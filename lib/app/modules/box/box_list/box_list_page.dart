@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:vocabular/app/models/langs.dart';
 import 'package:vocabular/app/models/vocab.dart';
 import 'package:vocabular/app/repositories/box_repository.dart';
@@ -85,7 +86,7 @@ class _BoxListPageState extends ModularState<BoxListPage, BoxListController> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.folder_open),
-            tooltip: 'Import Vocabs',
+            tooltip: translate('import'),
             onPressed: import,
           )
         ],
@@ -93,7 +94,7 @@ class _BoxListPageState extends ModularState<BoxListPage, BoxListController> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: editVocab,
         icon: Icon(Icons.add),
-        label: Text('Hinzufügen'),
+        label: Text(translate('add')),
       ),
       body: child,
     );
@@ -105,7 +106,7 @@ class _BoxListPageState extends ModularState<BoxListPage, BoxListController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Füge deine erste Vokabel hinzu:'),
+            Text(translate('box.add_vocab')),
             SizedBox(
               height: 16,
             ),
@@ -115,7 +116,7 @@ class _BoxListPageState extends ModularState<BoxListPage, BoxListController> {
                 borderRadius: BorderRadius.circular(8),
               ),
               icon: Icon(Icons.add),
-              label: Text('Vokabel Hinzufügen'),
+              label: Text(translate('add_vocab')),
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               //color: Theme.of(context).primaryColor,
             ),
@@ -146,10 +147,8 @@ class _BoxListPageState extends ModularState<BoxListPage, BoxListController> {
                     builder: (context) => VocabTable(
                       controller.vocabs,
                       showForms: controller.box.hasFormen,
-                      lang: getLanguageByIsoCode(
-                        controller.box.lang,
-                        germanLanguagesList,
-                      ).name,
+                      lang:
+                          getLanguageByIsoContext(controller.box.lang, context),
                       onSelected: editVocab,
                     ),
                   ),

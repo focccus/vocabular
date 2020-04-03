@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:vocabular/app/models/vocab.dart';
 import 'package:vocabular/app/widgets/layout_foundation.dart';
 
@@ -30,8 +31,6 @@ class TestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final w = MediaQuery.of(context).size.width;
-
     return Column(
       children: <Widget>[
         Expanded(
@@ -61,7 +60,7 @@ class TestCard extends StatelessWidget {
                           ? FocusScope.of(context).nextFocus()
                           : next(),
                       decoration: InputDecoration(
-                        labelText: askForeign ? lang : 'Deutsch',
+                        labelText: askForeign ? lang : translate('lang'),
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -74,7 +73,7 @@ class TestCard extends StatelessWidget {
                         textInputAction: TextInputAction.next,
                         onSubmitted: (_) => next(),
                         decoration: InputDecoration(
-                          labelText: 'Formen',
+                          labelText: translate('box.forms'),
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -88,7 +87,7 @@ class TestCard extends StatelessWidget {
         RaisedButton(
           padding: EdgeInsets.symmetric(horizontal: 64, vertical: 8),
           textColor: Colors.white,
-          child: Text('Weiter'),
+          child: Text(translate('navigation.continue')),
           onPressed: next,
         ),
         SizedBox(

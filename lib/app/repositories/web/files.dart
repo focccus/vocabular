@@ -22,7 +22,6 @@ Future<String> saveFile(String name, String content) async {
 }
 
 Future<String> selectFile([List<String> acceptedFormats]) async {
-  final Map<String, dynamic> data = {};
   final html.FileUploadInputElement input = html.FileUploadInputElement();
   input.click();
   await input.onChange.first;

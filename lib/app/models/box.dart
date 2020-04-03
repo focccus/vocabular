@@ -15,6 +15,7 @@ class Box {
   List<int> vocabIds;
   List<List<VocabCard>> compartments;
   int get vocabCount => vocabIds?.length ?? 0;
+  bool get hasVocabs => vocabIds?.isNotEmpty ?? false;
   DateTime latest;
   Box({
     this.id,

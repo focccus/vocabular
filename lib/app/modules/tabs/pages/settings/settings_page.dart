@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:language_pickers/language_pickers.dart';
 import 'package:language_pickers/languages.dart';
 import 'package:vocabular/app/models/langs.dart';
@@ -34,9 +35,11 @@ class _SettingsPageState
       builder: (context) => LanguagePickerDialog(
         titlePadding: EdgeInsets.all(8.0),
         searchCursorColor: Colors.pinkAccent,
-        searchInputDecoration: InputDecoration(hintText: 'Suchen...'),
+        searchInputDecoration: InputDecoration(
+          hintText: translate('search') + '...',
+        ),
         isSearchable: true,
-        title: Text('Wähle deine Sprache'),
+        title: Text(translate('settings.choose_language')),
         onValuePicked: (Language lang) => controller.addLang(lang.isoCode),
         itemBuilder: (lang) => LanguageTile(lang),
         languagesList: germanLanguagesList
@@ -51,7 +54,9 @@ class _SettingsPageState
     if (await controller.checkDeletable(lang)) {
       final res = await showYesNoDialog(
         context,
-        'Willst du ${getLanguageByIsoCode(lang, germanLanguagesList).name} wirklich löschen?',
+        translate('settings.confirm_delete', args: {
+          'lang': getLanguageByIsoContext(lang, context),
+        }),
       );
 
       if (res != null && res) {
@@ -61,8 +66,8 @@ class _SettingsPageState
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Sprache nicht löschbar'),
-          content: Text('Bitte entferne zuvor alle Vokabeln dieser Sprache.'),
+          title: Text(translate('settings.not_deletable')),
+          content: Text(translate('settings.not_deletable_text')),
           actions: <Widget>[
             RaisedButton(
               onPressed: () => Navigator.of(context).pop(),
@@ -96,11 +101,17 @@ class _SettingsPageState
         builder: (_) => ListView(
           padding: p.copyWith(top: 32),
           children: <Widget>[
-            TitleDivider('Sprachen'),
+            TitleDivider(translate('settings.languages')),
             ListBody(
               children: controller.langs
                   .map((l) => LanguageTile(
-                        getLanguageByIsoCode(l, germanLanguagesList),
+                        getLanguageByIsoCode(
+                          l,
+                          LocalizedApp.of(context)
+                              .delegate
+                              .currentLocale
+                              .languageCode,
+                        ),
                         onLongPress: () => removeLang(l),
                       ))
                   .toList(),
@@ -112,14 +123,14 @@ class _SettingsPageState
               child: OutlineButton.icon(
                 onPressed: addLang,
                 icon: Icon(Icons.language),
-                label: Text('Sprache hinzufügen'),
+                label: Text(translate('settings.add_language')),
               ),
             ),
-            TitleDivider('Noten'),
+            TitleDivider(translate('settings.grades')),
             ListTile(
               leading: Icon(Icons.blur_circular),
               title: Text(
-                'Wähle die gewünschte Bewertungsform',
+                translate('settings.choose_grade'),
               ),
               trailing: DropdownButton<String>(
                 value: controller.grades,
@@ -143,11 +154,11 @@ class _SettingsPageState
                 }).toList(),
               ),
             ),
-            TitleDivider('Aussehen'),
+            TitleDivider(translate('settings.appearence')),
             SwitchListTile(
               value: controller.isDark,
               onChanged: controller.toggleDarkMode,
-              title: Text('Dark mode'),
+              title: Text(translate('settings.dark_mode')),
             ),
             ColorChooser(
               controller.color,

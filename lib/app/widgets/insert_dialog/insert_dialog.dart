@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:vocabular/app/models/box.dart';
 import 'package:vocabular/app/models/langs.dart';
 import 'package:vocabular/app/models/vocab.dart';
 import 'package:vocabular/app/widgets/insert_dialog/dialog_controller.dart';
@@ -87,8 +87,10 @@ class _VocabDialogState extends ModularState<VocabDialog, DialogController> {
     FocusScope.of(context).nextFocus();
   }
 
-  String get languageName =>
-      getLanguageByIsoCode(controller.lang, germanLanguagesList).name;
+  String get languageName => getLanguageByIsoContext(
+        controller.lang,
+        context,
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -97,9 +99,9 @@ class _VocabDialogState extends ModularState<VocabDialog, DialogController> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       title: Stack(
         children: <Widget>[
-          Text(widget.vocab != null
-              ? 'Vokabel bearbeiten'
-              : 'Vokabel hinzufügen'),
+          Text(
+            translate(widget.vocab != null ? 'edit_vocab' : 'add_vocab'),
+          ),
           if (widget.vocab != null)
             Positioned(
               right: -16,
@@ -145,20 +147,26 @@ class _VocabDialogState extends ModularState<VocabDialog, DialogController> {
                 onSuggestionSelected: suggestionSelected,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Bitte gebe die Vokabel für $languageName ein';
+                    return translate(
+                      'insert_vocab',
+                      args: {'lang': languageName},
+                    );
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _textField,
-                decoration: InputDecoration(labelText: "Deutsch"),
+                decoration: InputDecoration(labelText: translate('lang')),
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (_) =>
                     widget.hasFormen ? formFocus.requestFocus() : submit(),
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Bitte gebe die Vokabel ein';
+                    return translate(
+                      'insert_vocab',
+                      args: {'lang': translate('lang')},
+                    );
                   }
                   return null;
                 },
@@ -169,7 +177,8 @@ class _VocabDialogState extends ModularState<VocabDialog, DialogController> {
                   controller: _textFieldForms,
                   textInputAction: TextInputAction.next,
                   onFieldSubmitted: (_) => submit(),
-                  decoration: InputDecoration(labelText: "Formen"),
+                  decoration:
+                      InputDecoration(labelText: translate('box.forms')),
                 ),
             ],
           ),
@@ -177,12 +186,12 @@ class _VocabDialogState extends ModularState<VocabDialog, DialogController> {
       ),
       actions: <Widget>[
         FlatButton(
-          child: Text('Abbrechen'),
+          child: Text(translate('navigation.cancel')),
           onPressed: () => Navigator.of(context).pop(null),
         ),
         RaisedButton(
           color: Colors.indigo,
-          child: Text('Weiter'),
+          child: Text(translate('navigation.continue')),
           onPressed: submit,
         )
       ],

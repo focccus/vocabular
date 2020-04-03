@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:vocabular/app/models/box.dart';
+import 'package:vocabular/app/models/langs.dart';
 import 'package:vocabular/app/widgets/layout_foundation.dart';
-import 'package:vocabular/app/widgets/title_divider.dart';
 import 'package:vocabular/app/widgets/vocab_table.dart';
 import 'export_controller.dart';
 
@@ -41,30 +42,25 @@ class _ExportPageState extends ModularState<ExportPage, ExportController> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                'Hier kannst du deine Vokabelbox exportieren. Wähle einfach die Vokabeln aus und teile sie mit deinen Freunden!',
+                translate('box.export_'),
                 textAlign: TextAlign.center,
               ),
             ),
-            VocabTable(
-              controller.vocabs,
-              selected: controller.selected?.toList(),
-              onSelected: controller.select,
-            ),
+            VocabTable(controller.vocabs,
+                selected: controller.selected?.toList(),
+                onSelected: controller.select,
+                lang: getLanguageByIsoContext(controller.box.lang, context)),
             CheckboxListTile(
               value: controller.justExportVocabs,
               onChanged: (v) => controller.justExportVocabs = v,
-              title: Text('Nur Vokabeln exportieren'),
-              subtitle: Text(
-                'Teile nur die einzelnen Vokabeln ohne die streng geheime Box freizugeben',
-              ),
+              title: Text(translate('box.justvocab')),
+              subtitle: Text(translate('box.justvocab_')),
             ),
             CheckboxListTile(
               value: controller.includeCompartments,
               onChanged: (v) => controller.includeCompartments = v,
-              title: Text('Speichere Fächer'),
-              subtitle: Text(
-                'Lege fest, ob der Fortschritt im Vokabeltrainer exportiert werden soll',
-              ),
+              title: Text(translate('box.export_coms')),
+              subtitle: Text(translate('box.export_coms_')),
             ),
             Builder(
               builder: (context) => Padding(
@@ -74,7 +70,7 @@ class _ExportPageState extends ModularState<ExportPage, ExportController> {
                   textColor: Colors.white,
                   onPressed: controller.export,
                   icon: Icon(Icons.file_download),
-                  label: Text('Exportieren'),
+                  label: Text(translate('box.export')),
                 ),
               ),
             )
@@ -88,7 +84,7 @@ class _ExportPageState extends ModularState<ExportPage, ExportController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Teilen'),
+        title: Text(translate('share')),
       ),
       body: Observer(
         builder: (context) {

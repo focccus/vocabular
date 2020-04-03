@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
 import 'package:vocabular/app/models/vocab.dart';

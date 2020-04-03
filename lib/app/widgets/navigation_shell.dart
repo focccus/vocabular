@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:navigation_rail/navigation_rail.dart' as nv;
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:vocabular/app/widgets/responsive_navigation.dart';
 
 const _tabletBreakpoint = 720.0;
-const _desktopBreakpoint = 1440.0;
 
 class NavigationShell extends StatelessWidget {
   final int currentPage;
@@ -27,7 +27,7 @@ class NavigationShell extends StatelessWidget {
     }
 
     return SafeArea(
-      child: nv.NavigationRail(
+      child: ResponsiveNavigation(
         currentIndex: currentPage,
         onTap: (val) {
           if (val != currentPage) {
@@ -50,9 +50,9 @@ class NavigationShell extends StatelessWidget {
         },
         drawerHeaderBuilder: (c) => UserAccountsDrawerHeader(
           accountName: Text('Vocabular'),
-          accountEmail: Text('The ultimate tool to learn vocabs'),
+          accountEmail: Text(translate('desc')),
         ),
-        drawerFooterBuilder: (c) => Align(
+        drawerFooterBuilder: (c) => Container(
           alignment: Alignment.bottomCenter,
           child: Text('Copyright 2020 focccus'),
         ),
@@ -60,15 +60,15 @@ class NavigationShell extends StatelessWidget {
         floatingActionButton: a,
         tabs: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            title: Text("Boxen"),
+            title: Text(translate('navigation.boxes')),
             icon: Icon(Icons.folder_open),
           ),
           BottomNavigationBarItem(
-            title: Text("Vokabeln"),
+            title: Text(translate('navigation.vocabs')),
             icon: Icon(Icons.language),
           ),
           BottomNavigationBarItem(
-            title: Text("Optionen"),
+            title: Text(translate('navigation.settings')),
             icon: Icon(Icons.settings),
           ),
         ],

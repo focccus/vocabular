@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:vocabular/app/models/box.dart';
 import 'package:vocabular/app/modules/tabs/pages/boxes/widgets/action_bar.dart';
 import 'package:vocabular/app/widgets/navigation_shell.dart';
@@ -32,8 +33,10 @@ class _BoxesPageState extends ModularState<BoxesPage, BoxesController> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text('Es sieht hier ziemlich leer aus!'),
-            Text('Fang doch gleich damit an eine Vokabelbox hinzuzufügen:'),
+            Text(
+              translate('box.empty'),
+              textAlign: TextAlign.center,
+            ),
             SizedBox(
               height: 16,
             ),
@@ -43,7 +46,7 @@ class _BoxesPageState extends ModularState<BoxesPage, BoxesController> {
                 borderRadius: BorderRadius.circular(8),
               ),
               icon: Icon(Icons.add),
-              label: Text('Box Hinzufügen'),
+              label: Text(translate('box.add_box')),
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               //color: Theme.of(context).primaryColor,
             )
@@ -91,7 +94,7 @@ class _BoxesPageState extends ModularState<BoxesPage, BoxesController> {
       ),
       bigActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.add),
-        label: Text('Hinzufügen'),
+        label: Text(translate('add')),
         onPressed: controller.addBox,
       ),
     );
@@ -138,7 +141,9 @@ class BoxPanelList extends StatelessWidget {
         headerBuilder: (c, b) {
           return ListTile(
             title: Text(box.title),
-            subtitle: Text('${box.vocabCount} Vocabs'),
+            subtitle: Text(
+              '${box.vocabCount} ' + translate('navigation.vocabs'),
+            ),
             leading: CircleAvatar(
               child: Text(box.lang.toUpperCase()),
             ),
@@ -151,14 +156,19 @@ class BoxPanelList extends StatelessWidget {
           ),
           ActionBar(
             onVocab: () => navigateToAndReload('box/vocabs', box.id),
-            onBoxes: () => navigateToAndReload('box', box.id),
-            onTest: () => navigateToAndReload('box/test', box.id),
+            onBoxes:
+                box.hasVocabs ? () => navigateToAndReload('box', box.id) : null,
+            onTest: box.hasVocabs
+                ? () => navigateToAndReload('box/test', box.id)
+                : null,
             onOptions: () => navigateToAndReload('box/settings', box.id),
-            onShare: () => Navigator.pushNamed(
-              context,
-              'box/export',
-              arguments: box,
-            ),
+            onShare: box.hasVocabs
+                ? () => Navigator.pushNamed(
+                      context,
+                      'box/export',
+                      arguments: box,
+                    )
+                : null,
           ),
         ]),
       );

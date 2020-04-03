@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'package:mobx/mobx.dart';
 import 'package:vocabular/app/models/box.dart';
 import 'package:vocabular/app/models/vocab.dart';

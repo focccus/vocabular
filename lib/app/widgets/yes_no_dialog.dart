@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 Future<bool> showYesNoDialog(BuildContext context, String title,
     {String content}) {
@@ -10,12 +11,12 @@ Future<bool> showYesNoDialog(BuildContext context, String title,
       content: content != null ? Text(content) : null,
       actions: <Widget>[
         FlatButton(
-          child: Text('Ja'),
+          child: Text(translate('navigation.yes')),
           onPressed: () => Navigator.of(context).pop(true),
         ),
         RaisedButton(
           autofocus: true,
-          child: Text('Nein'),
+          child: Text(translate('navigation.no')),
           onPressed: () => Navigator.of(context).pop(false),
         )
       ],

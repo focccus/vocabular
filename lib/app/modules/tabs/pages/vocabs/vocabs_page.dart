@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:vocabular/app/models/langs.dart';
 import 'package:vocabular/app/models/vocab.dart';
 import 'package:vocabular/app/repositories/box_repository.dart';
 import 'package:vocabular/app/widgets/insert_dialog/insert_dialog.dart';
 import 'package:vocabular/app/widgets/layout_foundation.dart';
 import 'package:vocabular/app/widgets/navigation_shell.dart';
-import 'package:vocabular/app/widgets/tabs.dart';
 import 'package:vocabular/app/widgets/vocab_table.dart';
 import 'vocabs_controller.dart';
 
@@ -91,10 +91,8 @@ class _VocabsPageState extends ModularState<VocabsPage, VocabsController> {
                   return VocabTable(
                     controller.displayedVocabs,
                     showForms: controller.showForms,
-                    lang: getLanguageByIsoCode(
-                      controller.selectedLang,
-                      germanLanguagesList,
-                    ).name,
+                    lang: getLanguageByIsoContext(
+                        controller.selectedLang, context),
                     onSelected: addVocab,
                   );
                 }),
@@ -137,10 +135,8 @@ class _VocabsPageState extends ModularState<VocabsPage, VocabsController> {
                         items: controller.langs
                             .map((l) => DropdownMenuItem<String>(
                                   value: l,
-                                  child: Text(
-                                    getLanguageByIsoCode(l, germanLanguagesList)
-                                        .name,
-                                  ),
+                                  child:
+                                      Text(getLanguageByIsoContext(l, context)),
                                 ))
                             .toList(),
                       ),
@@ -152,7 +148,7 @@ class _VocabsPageState extends ModularState<VocabsPage, VocabsController> {
                         style: BorderStyle.none,
                       ),
                     ),
-                    hintText: 'Durchsuche Vokabeln',
+                    hintText: translate('list.browse'),
                   ),
                 ),
               ),
@@ -161,7 +157,7 @@ class _VocabsPageState extends ModularState<VocabsPage, VocabsController> {
               ),
               IconButton(
                 icon: Icon(Icons.folder_open),
-                tooltip: 'Importieren',
+                tooltip: translate('import'),
                 onPressed: import,
               ),
               // DropdownButton<String>(
@@ -191,7 +187,7 @@ class _VocabsPageState extends ModularState<VocabsPage, VocabsController> {
                 );
 
               return Center(
-                child: Text('Keine Vokabeln für diese Sprache gefunden!'),
+                child: Text(translate('list.no_vocabs')),
               );
             },
           ),

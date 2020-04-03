@@ -1,9 +1,24 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_translate/localized_app.dart';
 import 'package:language_pickers/languages.dart';
 
-Language getLanguageByIsoCode(
-  String isoCode, [
+String getLanguageByIsoContext(
+  String isoCode,
+  BuildContext context, [
   List<Map<String, String>> langs,
 ]) {
+  final locale = LocalizedApp.of(context).delegate.currentLocale;
+  return getLanguageByIsoCode(isoCode, locale.languageCode, langs).name;
+}
+
+Language getLanguageByIsoCode(
+  String isoCode,
+  String lang, [
+  List<Map<String, String>> langs,
+]) {
+  print(lang);
+
+  if (lang == 'de') langs ??= germanLanguagesList;
   langs ??= defaultLanguagesList.cast<Map<String, String>>();
   try {
     final res = langs.firstWhere((language) =>

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:language_pickers/languages.dart';
-import 'package:language_pickers/utils/utils.dart';
 import 'package:mobx/mobx.dart';
 import 'package:vocabular/app/app_controller.dart';
-import 'package:vocabular/app/models/langs.dart';
 import 'package:vocabular/app/repositories/options_repository.dart';
 import 'package:vocabular/app/repositories/vocab_repository.dart';
 

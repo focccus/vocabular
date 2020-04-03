@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class ActionBar extends StatelessWidget {
   final void Function() onVocab;
@@ -35,25 +36,25 @@ class ActionBar extends StatelessWidget {
         ActionButton(
           onPressed: onBoxes,
           icon: Icons.library_books,
-          name: 'Boxen',
+          name: translate('box.compartments'),
           small: small,
         ),
         ActionButton(
           onPressed: onTest,
           icon: Icons.school,
-          name: 'Test',
+          name: translate('box.test'),
           small: small,
         ),
         ActionButton(
           onPressed: onShare,
           icon: Icons.share,
-          name: 'Teilen',
+          name: translate('share'),
           small: small,
         ),
         ActionButton(
           onPressed: onOptions,
           icon: Icons.settings,
-          name: 'Optionen',
+          name: translate('box.options'),
           small: small,
         ),
       ],

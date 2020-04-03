@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:vocabular/app/models/langs.dart';
 import 'package:vocabular/app/widgets/layout_foundation.dart';
 import 'package:vocabular/app/widgets/vocab_table.dart';
@@ -46,7 +47,7 @@ class _ImportPageState extends ModularState<ImportPage, ImportController> {
           OutlineButton.icon(
             onPressed: controller.importFile,
             icon: Icon(Icons.folder_open),
-            label: Text('Importieren'),
+            label: Text(translate('import')),
           ),
           SizedBox(
             height: 16,
@@ -69,23 +70,23 @@ class _ImportPageState extends ModularState<ImportPage, ImportController> {
           padding: p,
           children: <Widget>[
             Text(
-              '${controller.vocabsMap.length} Vokabeln zu Importieren',
+              translate(
+                'in.count',
+                args: {'num': controller.vocabsMap.length},
+              ),
               style: TextStyle(fontSize: 16),
             ),
             VocabTable(
               controller.vocabs,
               showForms: controller.hasFormen,
-              lang: getLanguageByIsoCode(controller.lang, germanLanguagesList)
-                  .name,
+              lang: getLanguageByIsoContext(controller.lang, context),
             ),
             if ((widget?.canImportBox ?? true) && controller.box != null)
               CheckboxListTile(
                 value: controller.importBox,
                 onChanged: (v) => controller.importBox = v,
-                title: Text('Box importieren'),
-                subtitle: Text(
-                  'Soll die ganze Box importiert werden oder nur die Vokabeln?',
-                ),
+                title: Text(translate('in.box')),
+                subtitle: Text(translate('in.box_')),
               ),
             // ListTile(
             //   title: Text(
@@ -111,7 +112,7 @@ class _ImportPageState extends ModularState<ImportPage, ImportController> {
                 horizontal: w >= 720 ? 64 : 16,
               ),
               child: RaisedButton(
-                child: Text('Bestätigen'),
+                child: Text(translate('in.confirm')),
                 onPressed: save,
                 textColor: Colors.white,
               ),
@@ -126,7 +127,7 @@ class _ImportPageState extends ModularState<ImportPage, ImportController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Importieren'),
+        title: Text(translate('import')),
       ),
       body: Observer(
         builder: (_) {

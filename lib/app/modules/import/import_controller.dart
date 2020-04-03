@@ -5,7 +5,6 @@ import 'package:vocabular/app/models/box.dart';
 import 'package:vocabular/app/models/vocab.dart';
 import 'package:vocabular/app/repositories/box_repository.dart';
 import 'package:vocabular/app/repositories/file_services.dart';
-import 'package:vocabular/app/repositories/options_repository.dart';
 import 'package:vocabular/app/repositories/vocab_repository.dart';
 
 part 'import_controller.g.dart';

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:vocabular/app/models/box.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:vocabular/app/models/langs.dart';
 import 'package:vocabular/app/widgets/layout_foundation.dart';
 import 'package:vocabular/app/widgets/title_divider.dart';
+import 'package:vocabular/app/widgets/yes_no_dialog.dart';
 import 'box_settings_controller.dart';
 
 class BoxSettingsPage extends StatefulWidget {
@@ -33,27 +34,10 @@ class _BoxSettingsPageState
   }
 
   Future<void> deleteBoxDialog() async {
-    final res = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        title: Text('Box löschen?'),
-        content: Text('Willst du wirklich diese Box für immer löschen?'),
-        actions: <Widget>[
-          FlatButton(
-            child: const Text('Abbrechen'),
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-          ),
-          FlatButton(
-            child: const Text('Ja'),
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-          ),
-        ],
-      ),
+    final res = await showYesNoDialog(
+      context,
+      translate('box.delete_box') + '?',
+      content: translate('box.delete_box_'),
     );
     if (res != null && res) {
       await controller.delete();
@@ -65,7 +49,10 @@ class _BoxSettingsPageState
 
   List<Widget> buildTestCount() => [
         ListTile(
-          title: Text('Vokabeltest mit ${controller.testCount} Vokabeln'),
+          title: Text(translate(
+            'box.vocab_test_count',
+            args: {'count': controller.testCount},
+          )),
         ),
         Slider(
           value: controller.testCount.toDouble(),
@@ -96,10 +83,11 @@ class _BoxSettingsPageState
       onWillPop: save,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Optionen'),
+          title: Text(translate('box.options')),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.delete_outline),
+              tooltip: translate('box.delete_box'),
               onPressed: deleteBoxDialog,
             )
           ],
@@ -113,26 +101,26 @@ class _BoxSettingsPageState
                   controller: titleController,
                   onSubmitted: (s) => save(),
                   decoration: InputDecoration(
-                    labelText: 'Boxname',
+                    labelText: translate('box.name'),
                     border: OutlineInputBorder(),
                   ),
                 ),
                 SwitchListTile(
                   value: controller.hasFormen,
                   onChanged: (b) => controller.hasFormen = b,
-                  title: Text('Formen'),
-                  subtitle: Text('Extra Feld, um Deklinationen einzutragen'),
+                  title: Text(translate('box.forms')),
+                  subtitle: Text(translate('box.forms_')),
                 ),
                 ListTile(
                   title: Text(
-                    'Sprache',
+                    translate('box.language'),
                     style: TextStyle(
                         color: controller.box.vocabCount > 0
                             ? Theme.of(context).disabledColor
                             : null),
                   ),
                   subtitle: controller.box.vocabCount > 0
-                      ? Text('Lösche alle Vokabeln, um die Sprache zu ändern')
+                      ? Text(translate('box.delete_lang'))
                       : null,
                   trailing: DropdownButton<String>(
                     value: controller.lang,
@@ -145,16 +133,18 @@ class _BoxSettingsPageState
                         .map((l) => DropdownMenuItem<String>(
                               value: l,
                               child: Text(
-                                getLanguageByIsoCode(l, germanLanguagesList)
-                                    .name,
+                                getLanguageByIsoContext(
+                                  controller.lang,
+                                  context,
+                                ),
                               ),
                             ))
                         .toList(),
                   ),
                 ),
-                TitleDivider('Vokabelbox'),
+                TitleDivider(translate('box.vocab_box')),
                 ListTile(
-                  title: Text('Anzahl der Fächer'),
+                  title: Text(translate('box.compartment_count')),
                 ),
                 Slider(
                   value: controller.compartments.toDouble(),
@@ -167,13 +157,13 @@ class _BoxSettingsPageState
                 SwitchListTile(
                   value: controller.mustType,
                   onChanged: (b) => controller.mustType = b,
-                  title: Text('Schriftlich abfragen'),
-                  subtitle: Text('Frage Karten mit Eingabe ab'),
+                  title: Text(translate('box.write')),
+                  subtitle: Text(translate('box.write_')),
                 ),
                 ListTile(
-                  title: Text('Fächer zurückgehen'),
+                  title: Text(translate('box.goback')),
                   subtitle: Text(
-                    'Anzahl der Fächer, die beim Fehler zurückgegangen werden',
+                    translate('box.goback_'),
                   ),
                 ),
                 Slider(
@@ -187,17 +177,20 @@ class _BoxSettingsPageState
                 SwitchListTile(
                   value: controller.random,
                   onChanged: (b) => controller.random = b,
-                  title: Text('Zufällig abfragen'),
+                  title: Text(translate('box.random')),
                 ),
-                TitleDivider('Vokabeltest'),
+                TitleDivider(translate('box.vocab_test')),
                 if (controller.box.vocabCount > 0) ...buildTestCount(),
                 ListTile(
-                  title: Text('Sprache'),
+                  title: Text(translate('box.language')),
                   subtitle: Text(
-                    'Lege fest welche Sprache abgefragt wird',
+                    translate('box.language_'),
                   ),
                   trailing: ToggleButtons(
-                    children: [Text('DE'), Text(controller.lang.toUpperCase())],
+                    children: [
+                      Text(translate('iso').toUpperCase()),
+                      Text(controller.lang.toUpperCase())
+                    ],
                     isSelected: controller.askLang,
                     onPressed: (i) => controller.askForeign = i == 1,
                   ),

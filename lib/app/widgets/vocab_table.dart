@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:vocabular/app/models/vocab.dart';
 
 class VocabTable extends StatelessWidget {
@@ -22,8 +23,8 @@ class VocabTable extends StatelessWidget {
       showCheckboxColumn: selected != null,
       columns: [
         DataColumn(label: Text(lang)),
-        if (showForms) DataColumn(label: Text('Formen')),
-        DataColumn(label: Text('Deutsch')),
+        if (showForms) DataColumn(label: Text(translate('box.forms'))),
+        DataColumn(label: Text(translate('lang'))),
       ],
       rows: vocabs
           .map(

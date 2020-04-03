@@ -1,10 +1,4 @@
-import 'dart:math';
-import 'dart:ui';
-
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart' as Hive;
-
-import 'package:vocabular/app/models/box.dart';
 
 class OptionsRepository {
   Hive.Box hive;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:vocabular/app/widgets/layout_foundation.dart';
 import 'package:vocabular/app/widgets/tabs.dart';
 import 'box_controller.dart';
@@ -59,7 +60,7 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
 
   Widget buildEmpty() {
     return Center(
-      child: Text('Du hast anscheinend keine Vokabeln in diesem Abschnitt.'),
+      child: Text(translate('com.empty')),
     );
   }
 
@@ -147,7 +148,12 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
         ),
         Spacer(),
         Text(
-          'Stufe ${controller.com.length - controller.selectedCompartment}',
+          translate(
+            'com.stage',
+            args: {
+              'num': controller.com.length - controller.selectedCompartment
+            },
+          ),
           style: TextStyle(fontSize: 20),
         ),
         if (vertPadding >= 16)
@@ -198,7 +204,7 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
                 decoration: InputDecoration(
                   labelText: controller.box.askForeign
                       ? controller.box.lang
-                      : 'Deutsch',
+                      : translate('lang'),
                   border: OutlineInputBorder(),
                   prefixIcon: checked
                       ? (controller.inputRight
@@ -236,7 +242,7 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
                   textInputAction: TextInputAction.next,
                   onSubmitted: (_) => check(),
                   decoration: InputDecoration(
-                    labelText: 'Formen',
+                    labelText: translate('box.forms'),
                     prefixIcon: checked
                         ? (controller.formsRight
                             ? Icon(Icons.done, color: Colors.green)
@@ -260,7 +266,7 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
             ? RaisedButton(
                 autofocus: true,
                 padding: EdgeInsets.symmetric(horizontal: 48, vertical: 8),
-                child: Text('Weiter'),
+                child: Text(translate('navigation.continue')),
                 textColor: Colors.white,
                 onPressed: () {
                   textController.clear();
@@ -274,7 +280,7 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
             : RaisedButton.icon(
                 padding: EdgeInsets.symmetric(horizontal: 48, vertical: 8),
                 icon: Icon(Icons.search),
-                label: Text('Überprüfen'),
+                label: Text(translate('com.check')),
                 textColor: Colors.white,
                 onPressed: check,
               ),
@@ -353,7 +359,7 @@ class _BoxPageState extends ModularState<BoxPage, BoxController>
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(32)),
                 icon: Icon(Icons.search),
-                label: Text('Überprüfen'),
+                label: Text(translate('com.check')),
                 onPressed: () => controller.vocabState = VocabState.checked,
               ),
             ],

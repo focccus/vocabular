@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:vocabular/app/models/vocab.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:vocabular/app/widgets/linear_percent_indicator.dart';
 import 'package:vocabular/app/widgets/yes_no_dialog.dart';
 import 'vocab_test_controller.dart';
@@ -98,7 +98,7 @@ class _VocabTestPageState
   Future<bool> canPop() {
     return showYesNoDialog(
       context,
-      'Willst du den Test wirklich abbrechen?',
+      translate('test.cancel'),
     );
   }
 
@@ -113,8 +113,13 @@ class _VocabTestPageState
                 child: LinearPercentIndicator(
                   leading: Padding(
                     padding: const EdgeInsets.only(right: 8),
-                    child: Text(
-                        '${controller.selectedPage + 1} von ${controller.length}'),
+                    child: Text(translate(
+                      'test.of',
+                      args: {
+                        '1': controller.selectedPage + 1,
+                        '2': controller.length
+                      },
+                    )),
                   ),
                   trailing: IconButton(
                     icon: Icon(Icons.format_list_bulleted),
@@ -157,13 +162,13 @@ class _VocabTestPageState
       child: Observer(
         builder: (context) => Scaffold(
           appBar: AppBar(
-            title: Text('test'),
+            title: Text(translate('box.test')),
           ),
           floatingActionButton: controller.length > 0 &&
                   controller.selectedPage == controller.length
               ? FloatingActionButton.extended(
                   icon: Icon(Icons.done),
-                  label: Text('Abgeben'),
+                  label: Text(translate('test.submit')),
                   onPressed: confirm,
                 )
               : null,

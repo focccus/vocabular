@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:vocabular/app/modules/box/vocab_test/results/results_controller.dart';
-import 'package:vocabular/app/repositories/grade_tables.dart';
 import 'package:vocabular/app/widgets/layout_foundation.dart';
 import 'package:vocabular/app/widgets/yes_no_dialog.dart';
 
@@ -33,8 +33,8 @@ class _ResultsPageState extends ModularState<ResultsPage, ResultsController> {
   Future<bool> canPop() {
     return showYesNoDialog(
       context,
-      'Willst du zurückgehen?',
-      content: 'Die Ergebnisse des Tests werden dabei gelöscht.',
+      translate('test.goback'),
+      content: translate('test.goback_'),
     );
   }
 
@@ -44,7 +44,7 @@ class _ResultsPageState extends ModularState<ResultsPage, ResultsController> {
       onWillPop: canPop,
       child: Scaffold(
           appBar: AppBar(
-            title: Text('Ergebnisse'),
+            title: Text(translate('test.results')),
           ),
           body: Observer(
             builder: (context) {
@@ -89,7 +89,13 @@ class _ResultsPageState extends ModularState<ResultsPage, ResultsController> {
                         style: TextStyle(fontSize: 48),
                       ),
                       Text(
-                        '${controller.points} von ${controller.totalPoints} Punkten',
+                        translate(
+                          'test.points',
+                          args: {
+                            '1': controller.points,
+                            '2': controller.totalPoints
+                          },
+                        ),
                         style: TextStyle(color: Colors.grey),
                       )
                     ],

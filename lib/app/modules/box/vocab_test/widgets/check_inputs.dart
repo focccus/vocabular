@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../vocab_value.dart';
 
@@ -24,7 +25,7 @@ class CheckInputs extends StatelessWidget {
           : EdgeInsets.all(16),
       children: <Widget>[
         Text(
-          'Überprüfe deine Eingaben:',
+          translate('test.check_input'),
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 18,
