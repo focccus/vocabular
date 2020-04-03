@@ -1,0 +1,90 @@
+{
+  "search": "Search",
+  "import": "Import",
+  "share": "Share",
+  "lang": "English",
+  "iso": "en",
+  "add": "Add",
+  "add_vocab": "Add Vocab",
+  "edit_vocab": "Edit Vocab",
+  "insert_vocab": "Please enter the word for {lang}",
+  "desc": "The ultimate tool to learn vocabs",
+  "navigation": {
+    "boxes": "Boxes",
+    "vocabs": "Words",
+    "settings": "Settings",
+    "continue": "Continue",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "settings": {
+    "languages": "Languages",
+    "add_language": "Add Language",
+    "choose_language": "Choose a new language",
+    "grades": "Grades",
+    "choose_grade": "Select the desired evaluation type",
+    "appearence": "Appearance",
+    "dark_mode": "Dark Mode",
+    "not_deletable": "Can't delete language",
+    "not_deletable_text": "Please remove all vocabulary of this language first.",
+    "confirm_delete": "Do you really want to delete {lang}?"
+  },
+  "list": {
+    "browse": "Browse Words",
+    "no_vocabs": "No vocabulary found for this language!"
+  },
+  "box": {
+    "empty": "It looks pretty empty here!\nStart adding a vocabulary box right away:",
+    "add_box": "Add Box",
+    "compartments": "Trainer",
+    "test": "Test",
+    "options": "Options",
+    "name": "Name",
+    "forms": "Forms",
+    "forms_": "Extra field to enter declensions",
+    "language": "Language",
+    "delete_lang": "Delete all vocabulary to change the language",
+    "language_": "Define which language is tested",
+    "vocab_box": "vocabulary box",
+    "compartment_count": "number of compartments",
+    "write": "Test writing",
+    "write_": "Check cards with input from",
+    "goback": "Compartments to return",
+    "goback_": "Number of compartments that are gone back on mistakes",
+    "random": "Ask randomly",
+    "vocab_test": "Vocabtest",
+    "vocab_test_count": "Vocabtest asking {count} words",
+    "delete_box": "Delete Box",
+    "delete_box_": "Do you really want to delete this box forever?",
+    "export": "Export",
+    "export_": "Here you can export your vocabulary box. Just select the words and share them with your friends!",
+    "justvocab": "Just export words",
+    "justvocab_": "Share only the individual words without publishing the top secret box",
+    "export_coms": "Save Compartments",
+    "export_coms_": "Determine whether the progress in the vocabulary trainer should be exported",
+    "add_vocab": "Add your first vocabulary:"
+  },
+
+  "com": {
+    "stage": "Stage {num}",
+    "check": "Check",
+    "empty": "You seem to have no vocabulary in that section."
+  },
+  "test": {
+    "of": "{1} of {2}",
+    "check_input": "Check your inputs",
+    "submit": "Submit",
+    "points": "{1} of {2} Points",
+    "results": "Results",
+    "cancel": "Do you really want to cancel the test?",
+    "goback": "You want to go back?",
+    "goback_": "The results of the test are deleted."
+  },
+  "in": {
+    "count": "Import {num} Words",
+    "box": "Import Box",
+    "box_": "Should the whole box be imported or just the vocabulary?",
+    "confirm": "Confirm"
+  }
+}

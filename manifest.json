@@ -1,7 +1,7 @@
 {
   "name": "Vocabular",
   "short_name": "Vocabular",
-  "start_url": "/vocabular",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#3F51B5",

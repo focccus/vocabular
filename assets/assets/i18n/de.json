@@ -1,0 +1,90 @@
+{
+  "search": "Suchen",
+  "import": "Importieren",
+  "share": "Teilen",
+  "lang": "Deutsch",
+  "iso": "de",
+  "add": "Hinzufügen",
+  "add_vocab": "Vokabel hinzufügen",
+  "edit_vocab": "Vokabel bearbeiten",
+  "insert_vocab": "Bitte gebe die Vokabel für {lang} ein",
+  "desc": "Der ultimative Trainer um Vokabeln zu lernen",
+  "navigation": {
+    "boxes": "Boxen",
+    "vocabs": "Vokabeln",
+    "settings": "Optionen",
+    "continue": "Weiter",
+    "cancel": "Abbrechen",
+    "yes": "Ja",
+    "no": "Nein"
+  },
+  "settings": {
+    "languages": "Sprachen",
+    "add_language": "Sprache hinzufügen",
+    "choose_language": "Wähle die neue Sprache",
+    "grades": "Noten",
+    "choose_grade": "Wähle die gewünschte Bewertungsform",
+    "appearence": "Aussehen",
+    "dark_mode": "Dark Mode",
+    "not_deletable": "Sprache nicht löschbar",
+    "not_deletable_text": "Bitte entferne zuvor alle Vokabeln dieser Sprache.",
+    "confirm_delete": "Willst du {lang} wirklich löschen?"
+  },
+  "list": {
+    "browse": "Durchsuche Vokabeln",
+    "no_vocabs": "Keine Vokabeln für diese Sprache gefunden!"
+  },
+  "box": {
+    "empty": "Es sieht hier ziemlich leer aus!\nFang doch gleich damit an eine Vokabelbox hinzuzufügen:",
+    "add_box": "Box Hinzufügen",
+    "compartments": "Trainer",
+    "test": "Test",
+    "options": "Optionen",
+    "name": "Name",
+    "forms": "Formen",
+    "forms_": "Extra Feld, um Deklinationen einzutragen",
+    "language": "Sprache",
+    "delete_lang": "Lösche alle Vokabeln, um die Sprache zu ändern",
+    "language_": "Lege fest welche Sprache abgefragt wird",
+    "vocab_box": "Vokabelbox",
+    "compartment_count": "Anzahl der Fächer",
+    "write": "Schriftlich abfragen",
+    "write_": "Frage Karten mit Eingabe ab",
+    "goback": "Fächer zurückgehen",
+    "goback_": "Anzahl der Fächer, die beim Fehler zurückgegangen werden",
+    "random": "Zufällig abfragen",
+    "vocab_test": "Vokabeltest",
+    "vocab_test_count": "Vokabeltest mit {count} Vokabeln",
+    "delete_box": "Box löschen",
+    "delete_box_": "Willst du wirklich diese Box für immer löschen?",
+    "export": "Exportieren",
+    "export_": "Hier kannst du deine Vokabelbox exportieren. Wähle einfach die Vokabeln aus und teile sie mit deinen Freunden!",
+    "justvocab": "Nur Vokabeln exportieren",
+    "justvocab_": "Teile nur die einzelnen Vokabeln ohne die streng geheime Box freizugeben",
+    "export_coms": "Speichere Fächer",
+    "export_coms_": "Lege fest, ob der Fortschritt im Vokabeltrainer exportiert werden soll",
+    "add_vocab": "Füge deine erste Vokabel hinzu:"
+  },
+
+  "com": {
+    "stage": "Stufe {num}",
+    "check": "Überprüfen",
+    "empty": "Du hast anscheinend keine Vokabeln in diesem Abschnitt."
+  },
+  "test": {
+    "of": "{1} von {2}",
+    "check_input": "Überprüfe deine Eingaben",
+    "submit": "Abgeben",
+    "points": "{1} von {2} Punkten",
+    "results": "Ergebnisse",
+    "cancel": "Willst du den Test wirklich abbrechen?",
+    "goback": "Willst du zurückgehen?",
+    "goback_": "Die Ergebnisse des Tests werden dabei gelöscht."
+  },
+  "in": {
+    "count": "{num} Vokabeln zu Importieren",
+    "box": "Box importieren",
+    "box_": "Soll die ganze Box importiert werden oder nur die Vokabeln?",
+    "confirm": "Bestätigen"
+  }
+}
